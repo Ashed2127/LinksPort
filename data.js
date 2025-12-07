@@ -12,7 +12,7 @@ const resources = [
   {"type":"channel","category":"Crypto","name":"SampleChannel","link":"https://t.me/sample"},
   {"type":"channel","category":"Programming","name":"SampleChannel","link":"https://t.me/sample"},
   {"type":"channel","category":"AI","name":"SampleChannel","link":"https://t.me/sample"},
-  {"type":"channel","category":"Tech","name":"SampleChannel","link":"https://t.me/sample"},
+  {"type":"channel","category":"Tech","name":"ASHED","link":"https://t.me/myashed"},
   {"type":"channel","category":"Finance","name":"SampleChannel","link":"https://t.me/sample"},
   {"type":"channel","category":"Travel","name":"SampleChannel","link":"https://t.me/sample"},
   {"type":"channel","category":"Novels","name":"SampleChannel","link":"https://t.me/sample"},
