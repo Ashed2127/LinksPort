@@ -1,6 +1,103 @@
+// ===================================
+// THREE.JS BACKGROUND INITIALIZATION (NEW)
+// ===================================
+let camera, scene, renderer, particles, particleCount;
+
+function initBackground() {
+    const container = document.getElementById('three-bg');
+
+    // Scene and Renderer
+    scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x000000); // Black background
+    renderer = new THREE.WebGLRenderer({ canvas: container, antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    // Camera
+    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
+    camera.position.z = 500;
+    
+    // Starfield Particles
+    particleCount = 1500;
+    const geometry = new THREE.BufferGeometry();
+    const positions = [];
+    const colors = [];
+    const color = new THREE.Color();
+
+    for (let i = 0; i < particleCount; i++) {
+        // Position particles randomly in a cube
+        positions.push(Math.random() * 2000 - 1000);
+        positions.push(Math.random() * 2000 - 1000);
+        positions.push(Math.random() * 2000 - 1000);
+
+        // Assign a color (white to light blue/cyan)
+        color.setHSL(Math.random() * 0.1 + 0.5, 0.9, 0.7);
+        colors.push(color.r, color.g, color.b);
+    }
+    
+    geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+    geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+
+    const material = new THREE.PointsMaterial({
+        size: 2,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.8
+    });
+
+    particles = new THREE.Points(geometry, material);
+    scene.add(particles);
+
+    // Handle window resize
+    window.addEventListener('resize', onWindowResize, false);
+}
+
+function onWindowResize() {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+}
+
+function animate() {
+    requestAnimationFrame(animate);
+
+    // Rotate the particle field slightly
+    particles.rotation.z += 0.0005;
+    particles.rotation.y += 0.0001;
+
+    renderer.render(scene, camera);
+}
+
+// ===================================
+// APPLICATION LOGIC
+// ===================================
+
 document.addEventListener("DOMContentLoaded", () => {
+    // START THREE.JS BACKGROUND
+    initBackground();
+    animate();
+    
+    // START APPLICATION UI
     loadTypes();
 });
+
+// ----------------------------------
+// Theme Toggle Function 
+// ----------------------------------
+function toggleTheme() {
+    const body = document.body;
+    const currentTheme = body.getAttribute('data-theme');
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    body.setAttribute('data-theme', newTheme);
+
+    // Update the icon
+    const toggleBtn = document.getElementById('theme-toggle-btn');
+    if (newTheme === 'dark') {
+        toggleBtn.innerHTML = '<i class="bi bi-sun-fill"></i>';
+    } else {
+        toggleBtn.innerHTML = '<i class="bi bi-moon-fill"></i>';
+    }
+}
+
 // ----------------------------------
 // Load Type Buttons
 // ----------------------------------

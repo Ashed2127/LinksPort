@@ -1,192 +1,231 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Telegram Directory</title>
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-
-    <script src="data.js"></script>
-    <script src="script.js" defer></script>
-
-    <style>
-        /* Telegram Background */
-        body {
-            margin: 0;
-            padding: 0;
-            background: black important!;
-            background: linear-gradient(180deg, #d7e8ff 0%, #ffffff 100%);
-            background-attachment: fixed;
-            font-family: "Segoe UI", sans-serif;
-        }
-
-        /* Main card container */
-        .tg-container {
-            max-width: 600px;
-            margin: 40px auto;
-            background: #ffffffd9;
-            backdrop-filter: blur(15px);
-            padding: 25px;
-            border-radius: 20px;
-            box-shadow: 0px 10px 25px rgba(0,0,0,0.12);
-        }
-
-        /* Header */
-        .tg-header {
-            background: #0088cc;
-            color: white;
-            padding: 15px;
-            font-size: 22px;
-            font-weight: 600;
-            text-align: center;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-        }
-
-        /* Back / main buttons */
-        .tg-btn {
-            background: #0088cc;
-            border: none;
-            color: white;
-            padding: 10px;
-            border-radius: 12px;
-            width: 100%;
-            margin-bottom: 10px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .tg-btn:hover {
-            background: #006ea6;
-        }
-
-        /* Category buttons */
-        .tg-btn-outline {
-            background: white;
-            border: 2px solid #0088cc;
-            color: #0088cc;
-            padding: 8px;
-            border-radius: 12px;
-            margin-bottom: 10px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: 0.2s;
-            display: inline-block;
-            width: 100%;
-            text-align: center;
-        }
-        .tg-btn-outline:hover {
-            background: #e6f0ff;
-        }
-
-        /* Open button inside list item */
-        .tg-btn-link {
-            background: #0088cc;
-            border: none;
-            color: white;
-            padding: 5px 12px;
-            border-radius: 12px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: 0.2s;
-            display: inline-block;
-            text-decoration: none;
-        }
-        .tg-btn-link:hover {
-            background: #006ea6;
-        }
-
-        /* Category grid */
-        #categories {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-        }
-
-        /* List items */
-        .list-group-item {
-            border-radius: 12px !important;
-            margin-bottom: 8px;
-        }
-        
-        /* --- NEW CODE START --- */
-        /* Styles for the profile picture */
-        .profile-pic {
-            width: 40px; /* Set a fixed size */
-            height: 40px;
-            border-radius: 50%; /* Makes it circular */
-            object-fit: cover; /* Ensures image fills the container without distortion */
-            margin-right: 12px; /* Spacing between image and name */
-        }
-        
-        
-        
-        /*NEW CODE ADDED*/
-        
-        
-    /* Back / main buttons */
-    .tg-btn {
-        background: #0088cc;
-        border: none;
-        color: white;
-        padding: 10px;
-        border-radius: 12px;
-        width: 100%;
-        margin-bottom: 10px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: 0.2s;
-    }
-    .tg-btn:hover {
-        background: #006ea6; /* This is the hover effect for regular buttons */
-    }
-    
-    /* --- START NEW/MODIFIED CODE --- */
-    /* New dedicated style for the non-clickable header button */
-    .tg-header-btn {
-        background: #0088cc;
-        color: white;
-        padding: 10px;
-        border-radius: 12px;
-        font-size: 18px; 
-        font-weight: 600; 
-        text-align: center;
-        margin-bottom: 15px;
-        cursor: default; /* Change cursor back to default pointer */
-    }
-
-    /* Disable hover effect for the header button */
-    .tg-header-btn:hover {
-        background: #0088cc; /* Keep the original background color */
-        box-shadow: none; /* Remove any potential shadow change */
-    }
-    /* --- END NEW/MODIFIED CODE --- */
-
-    /* ... (rest of your existing styles like .tg-btn-outline, .tg-btn-link, etc.) ... */
-
-        
-        /* --- NEW CODE END --- */
-    </style>
-</head>
-
-<body>
-    <div class="tg-container">
-
-        <div class="tg-header">
-            <i class="bi bi-telegram"></i> Link Port
-        </div>
-        
-
-
-        <div id="types" class="mb-3"></div>
-
-        <div id="categories" class="mb-3"></div>
-
-        <div id="results" class="mb-3"></div>
-
-    </div>
-</body>
-</html> 
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <title>Telegram Directory</title>
+ 
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+ 
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+ 
+     <script src="data.js"></script>
+     <script src="script.js" defer></script>
+     
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+ 
+     <style>
+         /* Telegram Background */
+         body {
+             margin: 0;
+             padding: 0;
+             /* Background color is now handled by the Three.js canvas */
+             background-attachment: fixed;
+             font-family: "Segoe UI", sans-serif;
+             color: #f8f9fa; 
+             transition: color 0.3s; 
+             position: relative; 
+             min-height: 100vh;
+         }
+         
+         /* NEW: Three.js Canvas Styling */
+         #three-bg {
+             position: fixed;
+             top: 0;
+             left: 0;
+             width: 100%;
+             height: 100%;
+             z-index: -1; /* Place behind all content */
+         }
+ 
+         /* Main card container */
+         .tg-container {
+             max-width: 600px;
+             margin: 40px auto;
+             background: #ffffffd9; /* Light mode semi-transparent white */
+             backdrop-filter: blur(15px);
+             padding: 25px;
+             border-radius: 20px;
+             box-shadow: 0px 10px 25px rgba(0,0,0,0.12);
+             transition: background 0.3s, box-shadow 0.3s; 
+             position: relative; /* Ensure it stays above the canvas */
+             z-index: 1; /* Ensure it stays above the canvas */
+         }
+ 
+         /* Header (Telegram Blue - common to both themes) */
+         .tg-header {
+             background: #0088cc;
+             color: white;
+             padding: 15px;
+             font-size: 22px;
+             font-weight: 600;
+             text-align: center;
+             border-radius: 12px;
+             margin-bottom: 20px;
+             box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+         }
+ 
+         /* Back / main buttons (Telegram Blue - common to both themes) */
+         .tg-btn {
+             background: #0088cc;
+             border: none;
+             color: white;
+             padding: 10px;
+             border-radius: 12px;
+             width: 100%;
+             margin-bottom: 10px;
+             font-size: 16px;
+             cursor: pointer;
+             transition: 0.2s;
+         }
+         .tg-btn:hover {
+             background: #006ea6;
+         }
+         
+         /* New dedicated style for the non-clickable header button (Telegram Blue - common to both themes) */
+         .tg-header-btn {
+             background: #0088cc;
+             color: white;
+             padding: 10px;
+             border-radius: 12px;
+             font-size: 18px; 
+             font-weight: 600; 
+             text-align: center;
+             margin-bottom: 15px;
+             cursor: default;
+         }
+ 
+         /* Disable hover effect for the header button */
+         .tg-header-btn:hover {
+             background: #0088cc;
+             box-shadow: none;
+         }
+ 
+         /* Category buttons */
+         .tg-btn-outline {
+             background: white;
+             border: 2px solid #0088cc;
+             color: #0088cc;
+             padding: 8px;
+             border-radius: 12px;
+             margin-bottom: 10px;
+             font-size: 14px;
+             cursor: pointer;
+             transition: 0.2s;
+             display: inline-block;
+             width: 100%;
+             text-align: center;
+         }
+         .tg-btn-outline:hover {
+             background: #e6f0ff;
+         }
+ 
+         /* Open button inside list item (Telegram Blue - common to both themes) */
+         .tg-btn-link {
+             background: #0088cc;
+             border: none;
+             color: white;
+             padding: 5px 12px;
+             border-radius: 12px;
+             font-size: 14px;
+             cursor: pointer;
+             transition: 0.2s;
+             display: inline-block;
+             text-decoration: none;
+         }
+         .tg-btn-link:hover {
+             background: #006ea6;
+         }
+ 
+         /* Category grid */
+         #categories {
+             display: grid;
+             grid-template-columns: repeat(2, 1fr);
+             gap: 10px;
+         }
+ 
+         /* List items */
+         .list-group-item {
+             border-radius: 12px !important;
+             margin-bottom: 8px;
+             background-color: white; /* Light Mode: White background for list items */
+             color: #212529; /* Light Mode: Dark text */
+             transition: background-color 0.3s, color 0.3s;
+         }
+         
+         /* Styles for the profile picture */
+         .profile-pic {
+             width: 40px; 
+             height: 40px;
+             border-radius: 50%;
+             object-fit: cover;
+             margin-right: 12px;
+         }
+         
+         /* Style for the theme toggle button */
+         #theme-toggle-btn {
+             position: absolute;
+             top: 50%;
+             right: 15px;
+             transform: translateY(-50%);
+             background: none;
+             border: none;
+             color: white;
+             font-size: 1.5rem;
+             cursor: pointer;
+             transition: color 0.2s;
+             padding: 0;
+         }
+ 
+         #theme-toggle-btn:hover {
+             color: #e6f0ff;
+         }
+         
+         /* --- DARK MODE STYLES START --- */
+         [data-theme="dark"] body {
+             color: #f8f9fa; 
+         }
+ 
+         [data-theme="dark"] .tg-container {
+             background: #202b38d9; /* Darker semi-transparent background */
+             box-shadow: 0px 10px 25px rgba(0,0,0,0.5);
+         }
+ 
+         [data-theme="dark"] .tg-btn-outline {
+             background: #202b38; /* Dark mode button background */
+             color: #79a8d3; /* Lighter blue for outline text */
+             border-color: #0088cc;
+         }
+         [data-theme="dark"] .tg-btn-outline:hover {
+             background: #293845;
+         }
+ 
+         [data-theme="dark"] .list-group-item {
+             background-color: #202b38; /* Dark mode list item background */
+             border-color: #3e4a57; /* Darker border for contrast */
+             color: #f8f9fa; /* Light text */
+         }
+         /* --- DARK MODE STYLES END --- */
+     </style>
+ </head>
+ 
+ <body data-theme="dark">
+     <canvas id="three-bg"></canvas>
+ 
+     <div class="tg-container">
+ 
+         <div class="tg-header" style="position: relative;">
+             <i class="bi bi-telegram"></i> Link Port
+             <button id="theme-toggle-btn" onclick="toggleTheme()">
+                 <i class="bi bi-sun-fill"></i>
+             </button>
+         </div>
+         
+         <div id="types" class="mb-3"></div>
+ 
+         <div id="categories" class="mb-3"></div>
+ 
+         <div id="results" class="mb-3"></div>
+ 
+     </div>
+ </body>
+ </html> 
